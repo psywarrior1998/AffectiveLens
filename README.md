@@ -1,53 +1,71 @@
-**Title:**
-**AffectiveLens: A Transformer-Based Engine for Emotion Detection**
+# AffectiveLens: A Transformer-Based Engine for Emotion Detection
 
-**Overview:**
-AffectiveLens is an end-to-end AI project that utilizes state-of-the-art DistilBERT Transformer embeddings to detect emotions in text. It evaluates six machine learning models to classify text sentiment into positive, negative, or neutral. This system demonstrates a comprehensive NLP pipeline for emotion detection.
+AffectiveLens is an end-to-end AI project for emotion detection. This system uses state-of-the-art DistilBERT Transformer embeddings to understand text nuances. It trains and benchmarks 6 machine learning models to accurately classify sentiment as positive, negative, or neutral, demonstrating a complete and robust NLP pipeline.
 
-**Key Features:**
+## 📜 Project Overview
 
-* **State-of-the-Art Embeddings**: Leverages the **distilbert-base-uncased** model for high-quality contextual embeddings.
-* **Comprehensive Model Comparison**: Benchmarks six machine learning models to find the best performer.
-* **Robust Data Processing**: Complete pipeline for cleaning, balancing (oversampling), and preparing the data.
-* **End-to-End Workflow**: From data ingestion to deployment of a final, deployable prediction function.
-* **Reproducible Environment**: Ensures consistent and reproducible results through a version-pinned environment.
+This project implements a full data science pipeline to tackle the problem of emotion detection in text, a key task in the field of Affective Computing and Natural Language Processing. It leverages the state-of-the-art DistilBERT model from Hugging Face to generate rich, contextual embeddings from raw text data. These embeddings serve as high-quality features to train and evaluate a suite of powerful classifiers—from Logistic Regression and SVMs to advanced gradient-boosted ensembles like LightGBM and XGBoost—to find the optimal model for the task.
 
-**Technologies & Tools:**
+The final result is a robust classifier that can accurately predict the emotional valence of new, unseen text, along with a deployable prediction function that encapsulates the entire workflow.
 
-* **DistilBERT** (Hugging Face)
-* **Python** (Jupyter Notebook, scikit-learn, XGBoost, LightGBM, CatBoost, Random Forest)
-* **Hugging Face Hub** (for pre-computed embeddings)
-* **Joblib** (for model serialization)
+## ✨ Key Features
 
-**Project Workflow:**
+- **State-of-the-Art Embeddings**: Utilizes the `distilbert-base-uncased` model for high-quality contextual text representation.
+- **Comprehensive Model Comparison**: Trains and evaluates 6 different machine learning algorithms in a "gauntlet" style to empirically determine the best performer.
+- **Robust Data Processing**: Includes a full pipeline for cleaning, balancing (via oversampling), and preparing the dataset for modeling.
+- **End-to-End Workflow**: The project is a self-contained notebook demonstrating the entire lifecycle from data ingestion to a final, deployable prediction function.
+- **Reproducible Environment**: The notebook includes a setup cell to ensure a consistent and reproducible software environment.
 
-1. **Environment Setup**: Creates a version-controlled environment to ensure reproducibility.
-2. **Data Ingestion**: Downloads pre-computed embeddings from Hugging Face.
-3. **Data Preparation**: Transforms the dataset into three emotion categories (Negative, Neutral, Positive).
-4. **Class Balancing**: Balances the data using Random Oversampling to avoid bias.
-5. **Model Training**: Trains six classifiers: Logistic Regression, SVM, XGBoost, LightGBM, CatBoost, Random Forest.
-6. **Final Evaluation**: Models are evaluated on an unseen test set based on F1-Score and accuracy.
+## ⚙️ Project Architecture & Workflow
 
-**Getting Started:**
+The project follows a systematic, multi-stage pipeline:
 
-1. **Clone the repository**
+1. **Environment Setup**: A sterile, version-pinned environment is created to ensure full reproducibility.
+2. **Data Ingestion**: Pre-computed embeddings for the GoEmotions dataset are automatically downloaded from the project's Hugging Face repository.
+3. **Data Preparation**: The data is split into training, validation, and test sets. The 28 original emotion labels are transformed into 3 mutually exclusive classes (Negative, Neutral, Positive).
+4. **Class Balancing**: The training set is balanced using the RandomOversampler technique to prevent model bias.
+5. **Model Training Gauntlet**: The balanced, vectorized data is used to train 6 different classifiers: Logistic Regression, Linear SVM, XGBoost, LightGBM, CatBoost, and Random Forest.
+6. **Final Evaluation**: All trained models are evaluated on the final, unseen test set to produce the definitive performance metrics.
 
-   ```bash
-   git clone https://github.com/psywarrior1998/AffectiveLens.git
-   cd AffectiveLens
-   ```
-2. **Set up the environment**
+## 🚀 Getting Started
 
-   ```bash
-   python -m venv venv
-   source venv/bin/activate
-   ```
-3. **Access the Data**
-   The data is automatically fetched from the Hugging Face repository.
-4. **Run the Notebook**
-   Execute the `AffectiveLens.ipynb` notebook in a Jupyter environment (e.g., Jupyter Lab, VS Code).
+To run this project yourself, follow these steps:
 
-**Model Performance Leaderboard:**
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/psywarrior1998/AffectiveLens.git
+cd AffectiveLens
+````
+
+### 2. Set Up the Environment
+
+It is highly recommended to use a virtual environment.
+
+```bash
+# Create and activate a virtual environment
+python -m venv venv
+source venv/bin/activate
+```
+
+* Install the required packages from the notebook's setup cell.
+* Alternatively, create a `requirements.txt` file and run:
+
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Access the Data
+
+The notebook is configured to automatically download the pre-computed embeddings from the official Hugging Face Hub repository for this project: `psyrishi/MoodPulse`. No manual data download is required.
+
+### 4. Run the Notebook
+
+Open the `AffectiveLens.ipynb` file in a Jupyter environment (like Jupyter Lab or VS Code) and execute the cells sequentially.
+
+## 🏆 Results: Model Performance Leaderboard
+
+The following table shows the final performance of all evaluated models on the unseen test set, based on the full execution of the notebook. The models are ranked by their F1-Score.
 
 | Model                   | F1 Score (Micro) | Accuracy |
 | ----------------------- | ---------------- | -------- |
@@ -58,47 +76,61 @@ AffectiveLens is an end-to-end AI project that utilizes state-of-the-art DistilB
 | **Linear SVM**          | 0.5973           | 59.73%   |
 | **Logistic Regression** | 0.5960           | 59.60%   |
 
-**Champion Model:**
+**Conclusion:**
+The LightGBM model was the overall best performer, achieving the highest F1-Score and accuracy on the final test data. This indicates that for this specific high-dimensional embedding space, the gradient boosting algorithm was most effective at identifying the complex, non-linear boundaries between the emotion classes.
 
-* **LightGBM** achieved the highest F1-Score and accuracy, making it the best performer for this task.
+## 📦 Accessing Pre-Trained Models
 
-**Accessing Pre-Trained Models:**
-Trained models, including the champion **LightGBM**, are available on [Hugging Face](https://huggingface.co/psyrishi/affectivelens-emotion-models).
+All trained models from this study are saved and available on the Hugging Face Hub in the following repository: [psyrishi/affectivelens-emotion-models](https://huggingface.co/psyrishi/affectivelens-emotion-models).
 
-Example code to download and use the model:
+You can easily download the champion model (LightGBM) or any other model using the `huggingface_hub` library.
 
 ```python
 from huggingface_hub import hf_hub_download
 import joblib
 
+# Define the repository and the specific model file to download
 REPO_ID = "psyrishi/affectivelens-emotion-models"
-FILENAME = "LightGBM_MicroF1_0.6240.pkl"
+FILENAME = "LightGBM_MicroF1_0.6240.pkl" # Filename for the champion model
 
+# Download the model file to a local path
 model_path = hf_hub_download(repo_id=REPO_ID, filename=FILENAME)
+
+# Load the model
 champion_model = joblib.load(model_path)
 print("Successfully loaded the champion model:", champion_model)
 ```
 
-**Usage Example:**
-Using the `predict_emotion` function for classifying text:
+## 🔬 Usage Example
+
+The final deliverable is a simple function, `predict_emotion`, that can classify any new piece of text using the champion model.
+
+### Example of how to use the final prediction function:
 
 ```python
 input_text = "This is quite disappointing, I had hoped for a better outcome."
+
+# The function returns the predicted label and its corresponding index
 predicted_label, predicted_index = predict_emotion(input_text)
 
 print(f'Text: "{input_text}"')
 print(f'--> Predicted Emotion: {predicted_label} (index: {predicted_index})')
+
+# Expected Output:
+# Text: "This is quite disappointing, I had hoped for a better outcome."
+# --> Predicted Emotion: negative (index: 0)
 ```
 
-**Future Work:**
+## 🔮 Future Work
 
-* **Fine-Tuning**: Fine-tune the entire DistilBERT model for better performance.
-* **Advanced Sampling**: Experiment with SMOTE (Synthetic Minority Over-sampling Technique) for better class balance.
-* **Error Analysis**: Conduct a deeper analysis of misclassifications (e.g., sarcasm or irony).
+* **Full Model Fine-Tuning**: Instead of just using DistilBERT for feature extraction, the entire model could be fine-tuned on the GoEmotions dataset to potentially achieve higher performance.
+* **Advanced Sampling**: Explore more sophisticated techniques like SMOTE (Synthetic Minority Over-sampling Technique) to see if creating synthetic data points outperforms the current random oversampling method.
+* **Deep Error Analysis**: Conduct a thorough analysis of the champion model's misclassifications to identify patterns (e.g., struggles with sarcasm, irony) and guide future improvements.
 
-**Acknowledgments:**
-This project utilizes the **GoEmotions dataset** by Google Research under the Creative Commons Attribution 4.0 International License.
+## 🙏 Acknowledgments
 
-**License:**
-MIT License (see LICENSE file for details).
+This project utilizes the GoEmotions dataset, created by Google Research. The dataset is made available under the Creative Commons Attribution 4.0 International License. We thank the original authors for making this valuable resource publicly available for research.
 
+## 📄 License
+
+The code in this repository is licensed under the MIT License. See the LICENSE file for more details.
