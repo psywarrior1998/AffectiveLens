@@ -8,37 +8,49 @@ This project implements a full data science pipeline to tackle the problem of em
 
 The final result is a robust classifier that can accurately predict the emotional valence of new, unseen text, along with a deployable prediction function that encapsulates the entire workflow.
 
+-----
+
+## 🚀 Live Demo
+
+Experience the AffectiveLens engine in action\!
+
+You can test the live, deployed application by clicking the link below:
+
+**[Try the AffectiveLens App on Streamlit\!](https://affectivelens.streamlit.app/)**
+
+-----
+
 ## ✨ Key Features
 
-- **State-of-the-Art Embeddings**: Utilizes the `distilbert-base-uncased` model for high-quality contextual text representation.
-- **Comprehensive Model Comparison**: Trains and evaluates 6 different machine learning algorithms in a "gauntlet" style to empirically determine the best performer.
-- **Robust Data Processing**: Includes a full pipeline for cleaning, balancing (via oversampling), and preparing the dataset for modeling.
-- **End-to-End Workflow**: The project is a self-contained notebook demonstrating the entire lifecycle from data ingestion to a final, deployable prediction function.
-- **Reproducible Environment**: The notebook includes a setup cell to ensure a consistent and reproducible software environment.
+  - **State-of-the-Art Embeddings**: Utilizes the `distilbert-base-uncased` model for high-quality contextual text representation.
+  - **Comprehensive Model Comparison**: Trains and evaluates 6 different machine learning algorithms in a "gauntlet" style to empirically determine the best performer.
+  - **Robust Data Processing**: Includes a full pipeline for cleaning, balancing (via oversampling), and preparing the dataset for modeling.
+  - **End-to-End Workflow**: The project is a self-contained notebook demonstrating the entire lifecycle from data ingestion to a final, deployable prediction function.
+  - **Reproducible Environment**: The notebook includes a setup cell to ensure a consistent and reproducible software environment.
 
 ## ⚙️ Project Architecture & Workflow
 
 The project follows a systematic, multi-stage pipeline:
 
-1. **Environment Setup**: A sterile, version-pinned environment is created to ensure full reproducibility.
-2. **Data Ingestion**: Pre-computed embeddings for the GoEmotions dataset are automatically downloaded from the project's Hugging Face repository.
-3. **Data Preparation**: The data is split into training, validation, and test sets. The 28 original emotion labels are transformed into 3 mutually exclusive classes (Negative, Neutral, Positive).
-4. **Class Balancing**: The training set is balanced using the RandomOversampler technique to prevent model bias.
-5. **Model Training Gauntlet**: The balanced, vectorized data is used to train 6 different classifiers: Logistic Regression, Linear SVM, XGBoost, LightGBM, CatBoost, and Random Forest.
-6. **Final Evaluation**: All trained models are evaluated on the final, unseen test set to produce the definitive performance metrics.
+1.  **Environment Setup**: A sterile, version-pinned environment is created to ensure full reproducibility.
+2.  **Data Ingestion**: Pre-computed embeddings for the GoEmotions dataset are automatically downloaded from the project's Hugging Face repository.
+3.  **Data Preparation**: The data is split into training, validation, and test sets. The 28 original emotion labels are transformed into 3 mutually exclusive classes (Negative, Neutral, Positive).
+4.  **Class Balancing**: The training set is balanced using the RandomOversampler technique to prevent model bias.
+5.  **Model Training Gauntlet**: The balanced, vectorized data is used to train 6 different classifiers: Logistic Regression, Linear SVM, XGBoost, LightGBM, CatBoost, and Random Forest.
+6.  **Final Evaluation**: All trained models are evaluated on the final, unseen test set to produce the definitive performance metrics.
 
 ## 🚀 Getting Started
 
 To run this project yourself, follow these steps:
 
-### 1. Clone the Repository
+### 1\. Clone the Repository
 
 ```bash
 git clone https://github.com/psywarrior1998/AffectiveLens.git
 cd AffectiveLens
-````
+```
 
-### 2. Set Up the Environment
+### 2\. Set Up the Environment
 
 It is highly recommended to use a virtual environment.
 
@@ -48,18 +60,20 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-* Install the required packages from the notebook's setup cell.
-* Alternatively, create a `requirements.txt` file and run:
+  * Install the required packages from the notebook's setup cell.
+  * Alternatively, create a `requirements.txt` file and run:
+
+<!-- end list -->
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 3. Access the Data
+### 3\. Access the Data
 
 The notebook is configured to automatically download the pre-computed embeddings from the official Hugging Face Hub repository for this project: `psyrishi/MoodPulse`. No manual data download is required.
 
-### 4. Run the Notebook
+### 4\. Run the Notebook
 
 Open the `AffectiveLens.ipynb` file in a Jupyter environment (like Jupyter Lab or VS Code) and execute the cells sequentially.
 
@@ -67,14 +81,14 @@ Open the `AffectiveLens.ipynb` file in a Jupyter environment (like Jupyter Lab o
 
 The following table shows the final performance of all evaluated models on the unseen test set, based on the full execution of the notebook. The models are ranked by their F1-Score.
 
-| Model                   | F1 Score (Micro) | Accuracy |
-| ----------------------- | ---------------- | -------- |
-| 🥇 **LightGBM**         | 0.6223           | 62.23%   |
-| 🥈 **XGBoost**          | 0.6167           | 61.67%   |
-| 🥉 **Random Forest**    | 0.6160           | 61.60%   |
-| **CatBoost**            | 0.6108           | 61.08%   |
-| **Linear SVM**          | 0.5973           | 59.73%   |
-| **Logistic Regression** | 0.5960           | 59.60%   |
+| Model | F1 Score (Micro) | Accuracy |
+| :--- | :--- | :--- |
+| 🥇 **LightGBM** | 0.6223 | 62.23% |
+| 🥈 **XGBoost** | 0.6167 | 61.67% |
+| 🥉 **Random Forest** | 0.6160 | 61.60% |
+| **CatBoost** | 0.6108 | 61.08% |
+| **Linear SVM** | 0.5973 | 59.73% |
+| **Logistic Regression** | 0.5960 | 59.60% |
 
 **Conclusion:**
 The LightGBM model was the overall best performer, achieving the highest F1-Score and accuracy on the final test data. This indicates that for this specific high-dimensional embedding space, the gradient boosting algorithm was most effective at identifying the complex, non-linear boundaries between the emotion classes.
@@ -123,9 +137,9 @@ print(f'--> Predicted Emotion: {predicted_label} (index: {predicted_index})')
 
 ## 🔮 Future Work
 
-* **Full Model Fine-Tuning**: Instead of just using DistilBERT for feature extraction, the entire model could be fine-tuned on the GoEmotions dataset to potentially achieve higher performance.
-* **Advanced Sampling**: Explore more sophisticated techniques like SMOTE (Synthetic Minority Over-sampling Technique) to see if creating synthetic data points outperforms the current random oversampling method.
-* **Deep Error Analysis**: Conduct a thorough analysis of the champion model's misclassifications to identify patterns (e.g., struggles with sarcasm, irony) and guide future improvements.
+  * **Full Model Fine-Tuning**: Instead of just using DistilBERT for feature extraction, the entire model could be fine-tuned on the GoEmotions dataset to potentially achieve higher performance.
+  * **Advanced Sampling**: Explore more sophisticated techniques like SMOTE (Synthetic Minority Over-sampling Technique) to see if creating synthetic data points outperforms the current random oversampling method.
+  * **Deep Error Analysis**: Conduct a thorough analysis of the champion model's misclassifications to identify patterns (e.g., struggles with sarcasm, irony) and guide future improvements.
 
 ## 🙏 Acknowledgments
 
